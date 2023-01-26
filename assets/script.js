@@ -52,16 +52,6 @@ arrowRight.addEventListener('click', function() {
 	dots[position].classList.add('dot_selected');
 });
 
-dots.forEach ((dot, p) => {
-	dot.addEventListener('click', function() {
-		image.src = slides[p].image;
-		tagLine.innerHTML = slides[p].tagLine;
-		resetDotClass();
-		dots[p].classList.add('dot_selected');
-		position = p;
-	});
-});
-
 function resetDotClass() {
 	dots.forEach ((dot) => {
   		dot.classList.remove('dot_selected');
