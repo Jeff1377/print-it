@@ -23,53 +23,47 @@ const arrowLeft = document.querySelector('.arrow_left');
 const arrowRight = document.querySelector('.arrow_right');
 const image = document.querySelector('.image_js');
 const tagLine = document.querySelector('.text_js');
+const dots = document.querySelectorAll('.dots .dot');
 
-/*tagLineLeft.addEventListener('click', function() {
+arrowLeft.addEventListener('click', function() {
 	position = position-1;
+	
 	if (position<0) {
 		position = 3;
 	}
-
-	console.log(slides[position].tagLine);
-	tagLineLeft.innerText = slides[position].tagLine;
-});
-
-tagLineRight.addEventListener('click', function() {
-	position = position+1;
-	if (position>3) {
-		position = 0;
-	}
-
-	console.log(slides[position].tagLine);
-});*/
-
-arrowLeft.addEventListener('click', function() {
-	//position = position-1;
-	position--
-	/*if (position<0) {
-		position = 3;
-	}*/
-	position = position<0 ? 3 : position;
-
-	console.log(slides[position]);
-	console.log(slides[position].image);
-	console.log(position);
-
+	
 	image.src = slides[position].image;
-	// TODO trouver comment remplacer le contenu d'un <p> depuis la doc
-	tagLine = slides[position].tagLine;
+	tagLine.innerHTML = slides[position].tagLine;
+	resetDotClass();
+	dots[position].classList.add('dot_selected');
+	
 });
 
 arrowRight.addEventListener('click', function() {
 	position = position+1;
+
 	if (position>3) {
 		position = 0;
 	}
 
-	console.log(slides[position]);
-	console.log(slides[position].image);
-	console.log(position);
-
 	image.src = slides[position].image;
-	//TODO la même chose
+	tagLine.innerHTML = slides[position].tagLine;
+	resetDotClass();
+	dots[position].classList.add('dot_selected');
 });
+
+dots.forEach ((dot, p) => {
+	dot.addEventListener('click', function() {
+		image.src = slides[p].image;
+		tagLine.innerHTML = slides[p].tagLine;
+		resetDotClass();
+		dots[p].classList.add('dot_selected');
+		position = p;
+	});
+});
+
+function resetDotClass() {
+	dots.forEach ((dot) => {
+  		dot.classList.remove('dot_selected');
+	});
+};
